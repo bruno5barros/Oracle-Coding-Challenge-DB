@@ -15,7 +15,7 @@ create or replace PACKAGE PKG_EMPLOYEE AS
   v_salary_raise employees.Salary%type) return VARCHAR2;
   
   function decrease_salary(v_id employees.employee_id%type, 
-  v_salary_raise employees.Salary%type) return VARCHAR2;
+  v_salary_decrease employees.Salary%type) return VARCHAR2;
   
   function transfer_employee(v_id employees.employee_id%type, 
   v_Department_Id employees.Department_Id%type) return VARCHAR2;
