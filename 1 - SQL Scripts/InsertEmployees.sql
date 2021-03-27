@@ -1,3 +1,6 @@
+-- Change the date format before insert the new rows.
+alter session set NLS_DATE_FORMAT='dd/mm/yy';
+
 INSERT INTO Employees (Employee_Id, Employee_Name, Job_Title, Manager_Id,
 Date_Hired, Salary, Department_Id) 
   WITH newEmployees AS ( 
