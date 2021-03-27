@@ -1,0 +1,24 @@
+Hi everyone,
+
+I hope you are doing great.
+This is my solution to the coding challenge. I developed my solution over SQL Developer.
+
+In oder to test my solution, you have to run my solution in following order in SQL Developer:
+# 1 - SQL Scripts(folder)
+	- Create the tables and relatioship by runing (AppendixDataStructures.sql);
+	- Insert all departments by runing (InsertDepartments.sql);
+	- Insert all Employees by runing (InsertEmployees.sql);
+	- Get requested reports by runing (EmployeeReport.sql);
+	- Create the sequence to be used in our employee package by runing (Sequence.sql);
+
+# 2 - PL SQL PKG(folder)
+	- Create a package and copy and paste the code into these files (PKG_EMPLOYEE.pls & PKG_EMPLOYEE_BODY.pls);
+
+# 3 - PL SQL Test(folder)
+	- In order to run these tests you have to install utPLSQL;
+	- Create a package and copy and paste the code into these files (TEST_PKG_EMPLOYEE.pls & test_pkg_employee_body.pls);
+
+Thank you for the opportunity.
+
+Kind regards,
+Bruno Barros
