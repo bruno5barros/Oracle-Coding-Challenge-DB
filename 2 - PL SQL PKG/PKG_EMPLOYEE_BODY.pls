@@ -93,9 +93,15 @@ create or replace PACKAGE BODY PKG_EMPLOYEE AS
   function transfer_employee(v_id employees.employee_id%type, 
   v_Department_Id employees.Department_Id%type) return VARCHAR2 AS
   BEGIN
-    update employees SET Department_Id = v_Department_Id where employee_id = v_id;
-    commit;
-    RETURN 'Employee transferred with sucess.';
+  
+    if v_id is null then 
+      dbms_output.put_line('No employee was send.');
+      RETURN null;
+    else
+      update employees SET Department_Id = v_Department_Id where employee_id = v_id;
+      commit;
+      RETURN 'Employee transferred with sucess.';
+    end if;  
     
   exception
     when others then

@@ -1,6 +1,5 @@
 create or replace PACKAGE PKG_EMPLOYEE AS 
 
-  --v_pk_res_g VARCHAR2(50) := '';
   v_emp_row_g employees%rowtype;
 
   function get_employee(v_id employees.employee_id%type) 
