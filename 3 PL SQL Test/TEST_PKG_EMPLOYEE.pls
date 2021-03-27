@@ -9,7 +9,7 @@ create or replace PACKAGE test_pkg_employee IS
    PROCEDURE p_get_employee;
    
    --%test
-   PROCEDURE p_employeeno_data_found;
+   PROCEDURE p_employee_no_data_found;
 
    --%test
    PROCEDURE p_create_employee;
@@ -33,12 +33,30 @@ create or replace PACKAGE test_pkg_employee IS
    PROCEDURE p_inc_sal_w_sal_percent2;
 
    --%test
-   PROCEDURE decrease_salary;
+   PROCEDURE p_decrease_salary;
+   
+   --%test
+   PROCEDURE p_dec_sal_no_user;
+   
+    --%test
+   PROCEDURE p_dec_sal_wrg_perc;
+   
+    --%test
+   PROCEDURE p_dec_sal_wrg_perc2;
 
    --%test
-   PROCEDURE transfer_employee;
+   PROCEDURE p_transfer_employee;
+   
+   --%test
+   PROCEDURE p_transf_emp_empty;
+   
+   --%test
+   PROCEDURE p_transf_emp_wrg_dep;
 
    --%test
-   PROCEDURE get_salary;
+   PROCEDURE p_get_salary;
+   
+   --%test
+   PROCEDURE p_get_sal_no_usr;
 
 END test_pkg_employee;

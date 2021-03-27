@@ -17,7 +17,7 @@ create or replace PACKAGE BODY test_pkg_employee IS
    END p_get_employee;
    
     -- test get_employee   --
-   PROCEDURE p_employeeno_data_found IS
+   PROCEDURE p_employee_no_data_found IS
       l_expected   INTEGER := 0;
       v_emp_name_expected varchar2(3):= null;
       l_actual employees%rowtype;
@@ -26,7 +26,7 @@ create or replace PACKAGE BODY test_pkg_employee IS
 
       -- assert
       ut.expect(l_actual.EMPLOYEE_NAME).to_equal(v_emp_name_expected);
-   END p_employeeno_data_found;
+   END p_employee_no_data_found;
 
    --
    -- test create_employee   --
@@ -152,50 +152,145 @@ create or replace PACKAGE BODY test_pkg_employee IS
 
    --
    -- test decrease_salary   --
-   PROCEDURE decrease_salary IS
-      l_actual   INTEGER := 0;
-      l_expected INTEGER := 1;
+   PROCEDURE p_decrease_salary IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := 'Employee salary updated with sucess.';
    BEGIN
       -- populate actual
-      -- pkg_employee.decrease_salary;
-
-      -- populate expected
-      -- ...
+      l_actual := PKG_EMPLOYEE.DECREASE_SALARY(
+        V_ID => 90001,
+        V_SALARY_DECREASE => 0.5
+      );
 
       -- assert
       ut.expect(l_actual).to_equal(l_expected);
-   END decrease_salary;
+   END p_decrease_salary;
+   
+   
+   -- test decrease_salary   --
+   PROCEDURE p_dec_sal_no_user IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := 'There is no employee with the selected id.';
+   BEGIN
+      -- populate actual
+      l_actual := PKG_EMPLOYEE.DECREASE_SALARY(
+        V_ID => 0,
+        V_SALARY_DECREASE => 0.5
+      );
+
+      -- assert
+      ut.expect(l_actual).to_equal(l_expected);
+   END p_dec_sal_no_user;
+   
+   
+   -- test decrease_salary   --
+   PROCEDURE p_dec_sal_wrg_perc IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := 'The Percentage of the salary decrease has to be between 0 and 1.';
+   BEGIN
+      -- populate actual
+      l_actual := PKG_EMPLOYEE.DECREASE_SALARY(
+        V_ID => 0,
+        V_SALARY_DECREASE => 0
+      );
+
+      -- assert
+      ut.expect(l_actual).to_equal(l_expected);
+   END p_dec_sal_wrg_perc;
+   
+   
+   -- test decrease_salary   --
+   PROCEDURE p_dec_sal_wrg_perc2 IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := 'The Percentage of the salary decrease has to be between 0 and 1.';
+   BEGIN
+      -- populate actual
+      l_actual := PKG_EMPLOYEE.DECREASE_SALARY(
+        V_ID => 0,
+        V_SALARY_DECREASE => 2
+      );
+
+      -- assert
+      ut.expect(l_actual).to_equal(l_expected);
+   END p_dec_sal_wrg_perc2;
+
 
    --
    -- test transfer_employee   --
-   PROCEDURE transfer_employee IS
-      l_actual   INTEGER := 0;
-      l_expected INTEGER := 1;
+   PROCEDURE p_transfer_employee IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := 'Employee transferred with sucess.';
    BEGIN
       -- populate actual
-      -- pkg_employee.transfer_employee;
-
-      -- populate expected
-      -- ...
+      l_actual := PKG_EMPLOYEE.TRANSFER_EMPLOYEE(
+        V_ID => 90002,
+        V_DEPARTMENT_ID => 2
+      );
 
       -- assert
       ut.expect(l_actual).to_equal(l_expected);
-   END transfer_employee;
+   END p_transfer_employee;
+   
+   
+   -- test transfer_employee   --
+   PROCEDURE p_transf_emp_empty IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := null;
+   BEGIN
+      -- populate actual
+      l_actual := PKG_EMPLOYEE.TRANSFER_EMPLOYEE(
+        V_ID => null,
+        V_DEPARTMENT_ID => 2
+      );
+
+      -- assert
+      ut.expect(l_actual).to_equal(l_expected);
+   END p_transf_emp_empty;
+   
+   
+    -- test transfer_employee   --
+   PROCEDURE p_transf_emp_wrg_dep IS
+      l_actual   VARCHAR2(100);
+      l_expected VARCHAR2(100) := null;
+   BEGIN
+      -- populate actual
+      l_actual := PKG_EMPLOYEE.TRANSFER_EMPLOYEE(
+        V_ID => 90002,
+        V_DEPARTMENT_ID => 0
+      );
+
+      -- assert
+      ut.expect(l_actual).to_equal(l_expected);
+   END p_transf_emp_wrg_dep;
 
    --
    -- test get_salary   --
-   PROCEDURE get_salary IS
+   PROCEDURE p_get_salary IS
       l_actual   INTEGER := 0;
-      l_expected INTEGER := 1;
+      l_expected INTEGER := 32000;
    BEGIN
       -- populate actual
-      -- pkg_employee.get_salary;
-
-      -- populate expected
-      -- ...
+      l_actual := PKG_EMPLOYEE.GET_SALARY(
+        V_ID => 90004
+      );
 
       -- assert
       ut.expect(l_actual).to_equal(l_expected);
-   END get_salary;
+   END p_get_salary;
+   
+   
+      -- test get_salary   --
+   PROCEDURE p_get_sal_no_usr IS
+      l_actual   INTEGER := 0;
+      l_expected INTEGER := null;
+   BEGIN
+      -- populate actual
+      l_actual := PKG_EMPLOYEE.GET_SALARY(
+        V_ID => 0
+      );
+
+      -- assert
+      ut.expect(l_actual).to_equal(l_expected);
+   END p_get_sal_no_usr;
 
 END test_pkg_employee;
